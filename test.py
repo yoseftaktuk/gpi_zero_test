@@ -14,6 +14,7 @@ led = PWMLED(17)
 #     led.value = 1  # full brightness
 #     sleep(1)
 counter = 0.1
+led.value = 0
 while True:
     led.value = counter  # off
     sleep(0.001)
