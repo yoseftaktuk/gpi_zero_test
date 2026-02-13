@@ -2,15 +2,32 @@
 # from time import sleep
 # led = PWMLED(17)
 
+# from mfrc522 import MFRC522
+# reader = MFRC522() 
+
+
+# status =  None
+# while status != reader.MI_OK:
+# 	(status, TagType) = reader.Request(reader.PICC_REQIDL)
+# 	if status == reader.MI_OK:
+# 		print("Connection Success!")
 from mfrc522 import MFRC522
-reader = MFRC522() 
+import time
 
+reader = MFRC522()
 
-status =  None
-while status != reader.MI_OK:
-	(status, TagType) = reader.Request(reader.PICC_REQIDL)
-	if status == reader.MI_OK:
-		print("Connection Success!")
+while True:
+    (status, tag_type) = reader.request(reader.PICC_REQIDL)
+
+    if status == reader.MI_OK:
+        print("Card detected")
+
+        (status, uid) = reader.anticoll()
+        if status == reader.MI_OK:
+            print("UID:", uid)
+
+    time.sleep(0.5)
+
 # while True:
 #     led.value = 0  # off
 #     sleep(1)
