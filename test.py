@@ -11,22 +11,18 @@
 # 	(status, TagType) = reader.Request(reader.PICC_REQIDL)
 # 	if status == reader.MI_OK:
 # 		print("Connection Success!")
-from mfrc522 import MFRC522
-import time
+from mfrc522 import SimpleMFRC522
+import RPi.GPIO as GPIO
 
-reader = MFRC522()
+reader = SimpleMFRC522()
 
-while True:
-    (status, tag_type) = reader.request(reader.PICC_REQIDL)
+try:
+    print("Place card...")
+    id, text = reader.read()
+    print("Card ID:", id)
+finally:
+    GPIO.cleanup()
 
-    if status == reader.MI_OK:
-        print("Card detected")
-
-        (status, uid) = reader.anticoll()
-        if status == reader.MI_OK:
-            print("UID:", uid)
-
-    time.sleep(0.5)
 
 # while True:
 #     led.value = 0  # off
