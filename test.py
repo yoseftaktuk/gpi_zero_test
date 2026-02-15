@@ -2,15 +2,28 @@
 # from time import sleep
 # led = PWMLED(17)
 
-from mfrc522 import MFRC522
-reader = MFRC522() 
+# from mfrc522 import MFRC522
+# reader = MFRC522() 
 
 
-status =  None
-while status != reader.MI_OK:
-	(status, TagType) = reader.Request(reader.PICC_REQIDL)
-	if status == reader.MI_OK:
-		print("Connection Success!")
+# status =  None
+# while status != reader.MI_OK:
+# 	(status, TagType) = reader.Request(reader.PICC_REQIDL)
+# 	if status == reader.MI_OK:
+# 		print("Connection Success!")
+from mfrc522 import SimpleMFRC522
+import RPi.GPIO as GPIO
+
+reader = SimpleMFRC522()
+
+try:
+    print("Place card...")
+    id, text = reader.read()
+    print("Card ID:", id)
+finally:
+    GPIO.cleanup()
+
+
 # while True:
 #     led.value = 0  # off
 #     sleep(1)
