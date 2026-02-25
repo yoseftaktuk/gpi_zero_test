@@ -24,6 +24,8 @@ def pulse_detected(channel):
     global count
     count += 1
     print("Pulse:", count)
+    if count == 15:
+        print('10 shckel')
 
 GPIO.add_event_detect(17, GPIO.FALLING, callback=pulse_detected, bouncetime=50)
 if count == 15:
