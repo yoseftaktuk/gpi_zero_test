@@ -11,17 +11,34 @@
 # 	(status, TagType) = reader.Request(reader.PICC_REQIDL)
 # 	if status == reader.MI_OK:
 # 		print("Connection Success!")
-from mfrc522 import SimpleMFRC522
+# from mfrc522 import SimpleMFRC522
 import RPi.GPIO as GPIO
+import time
 
-reader = SimpleMFRC522()
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(17, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
-try:
-    print("Place card...")
-    id, text = reader.read()
-    print("Card ID:", id)
-finally:
-    GPIO.cleanup()
+count = 0
+
+def pulse_detected(channel):
+    global count
+    count += 1
+    print("Pulse:", count)
+
+GPIO.add_event_detect(17, GPIO.RISING, callback=pulse_detected)
+
+while True:
+    time.sleep(1)
+
+
+# reader = SimpleMFRC522()
+
+# try:
+#     print("Place card...")
+#     id, text = reader.read()
+#     print("Card ID:", id)
+# finally:
+#     GPIO.cleanup()
 
 
 # while True:
