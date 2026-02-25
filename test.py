@@ -16,7 +16,7 @@ import RPi.GPIO as GPIO
 import time
 
 GPIO.setmode(GPIO.BCM)
-GPIO.setup(17, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+GPIO.setup(17, GPIO.IN, pull_up_down=GPIO.PUD_UP)  # Pull-Up כי פולס = GND
 
 count = 0
 
@@ -25,16 +25,13 @@ def pulse_detected(channel):
     count += 1
     print("Pulse:", count)
 
-GPIO.add_event_detect(17, GPIO.RISING, callback=pulse_detected, bouncetime=5)
+GPIO.add_event_detect(17, GPIO.FALLING, callback=pulse_detected, bouncetime=50)
 
 try:
     while True:
         time.sleep(1)
 
 except KeyboardInterrupt:
-    print("\nStopped by user")
-
-finally:
     GPIO.cleanup()
 
 
