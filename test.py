@@ -25,10 +25,17 @@ def pulse_detected(channel):
     count += 1
     print("Pulse:", count)
 
-GPIO.add_event_detect(17, GPIO.RISING, callback=pulse_detected)
+GPIO.add_event_detect(17, GPIO.RISING, callback=pulse_detected, bouncetime=5)
 
-while True:
-    time.sleep(1)
+try:
+    while True:
+        time.sleep(1)
+
+except KeyboardInterrupt:
+    print("\nStopped by user")
+
+finally:
+    GPIO.cleanup()
 
 
 # reader = SimpleMFRC522()
