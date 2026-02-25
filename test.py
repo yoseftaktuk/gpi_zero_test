@@ -26,7 +26,8 @@ def pulse_detected(channel):
     print("Pulse:", count)
 
 GPIO.add_event_detect(17, GPIO.FALLING, callback=pulse_detected, bouncetime=50)
-
+if count == 15:
+    print('10 shckel')
 try:
     while True:
         time.sleep(1)
