@@ -28,7 +28,7 @@ def pulse_detected(channel):
         global count
         count += 1
         after = datetime.datetime.now()
-        print(now - after)
+        print(after - now)
        
 
 def count_coin():
