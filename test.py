@@ -28,7 +28,7 @@ def pulse_detected(channel):
         global count
         count += 1
         after = datetime.datetime.now()
-        if after - befor > datetime('0:00:00.000014'):
+        if after - befor > datetime.datetime('0:00:00.000014'):
              print('aa')
              
         # a = after - befor
