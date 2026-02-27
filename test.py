@@ -45,19 +45,24 @@ def count_coin():
             if last_pulse_time is not None:
                 delta = datetime.datetime.now() - last_pulse_time
 
-                # אם עברו 200 מילישניות בלי פולס חדש
+
                 if delta > datetime.timedelta(milliseconds=200):
 
                     print("Finished pulses:", count)
 
                     if count == 10:
-                        print("5 Shekel detected")
+                        print("5 שקל")
                     elif count == 15:
-                        print("10 Shekel detected")
+                        print("10 שקל")
+
+                    elif count == 5:
+                        print('שקל')   
+
+                    elif count == 1:
+                        print('10 אגורות')     
                     else:
                         print("Unknown coin")
 
-                    # איפוס לסבב הבא
                     count = 0
                     last_pulse_time = None
 
