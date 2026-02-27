@@ -28,14 +28,13 @@ def pulse_detected(channel):
         global count
         count += 1
         after = datetime.datetime.now()
-        print(after - befor)
-        print(after.microsecond)
+        # a = after - befor
+        # print(a)
+        
        
 
 def count_coin():
-    GPIO.add_event_detect(17, GPIO.FALLING, callback=pulse_detected, bouncetime=50)
-    after = datetime.datetime.now()
-    print(after)
+    print(GPIO.add_event_detect(17, GPIO.FALLING, callback=pulse_detected, bouncetime=50))
     try:
         while True:
             sleep(1)
