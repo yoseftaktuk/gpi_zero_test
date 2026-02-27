@@ -24,16 +24,17 @@ GPIO.setup(17, GPIO.IN, pull_up_down=GPIO.PUD_UP)  # Pull-Up כי פולס = GND
 count = 0
 
 def pulse_detected(channel):
+        now = datetime.datetime.now()
         global count
         count += 1
-        print(count)
+        after = datetime.datetime.now()
+        print(now= after)
        
 
 def count_coin():
-    now = datetime.datetime.now()
     GPIO.add_event_detect(17, GPIO.FALLING, callback=pulse_detected, bouncetime=50)
     after = datetime.datetime.now()
-    print(now - after)
+    print(after)
     try:
         while True:
             sleep(1)
