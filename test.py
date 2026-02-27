@@ -22,22 +22,30 @@ GPIO.setmode(GPIO.BCM)
 GPIO.setup(17, GPIO.IN, pull_up_down=GPIO.PUD_UP)  # Pull-Up כי פולס = GND
 
 count = 0
-
+befor = datetime.datetime.now()
 def pulse_detected(channel):
-        befor = datetime.datetime.now()
+        global befor
         global count
         count += 1
         after = datetime.datetime.now()
-    
+        if after - befor > datetime('0:00:00.000014'):
+             print('aa')
+             
+        # a = after - befor
+        # print(a)
         
        
 
 def count_coin():
+    global befor
+    befor = datetime.datetime.now()
+    GPIO.add_event_detect(17, GPIO.FALLING, callback=pulse_detected, bouncetime=50)
     try:
         while True:
-            GPIO.add_event_detect(17, GPIO.FALLING, callback=pulse_detected, bouncetime=50)
+            sleep(1)
     except KeyboardInterrupt:
-        GPIO.cleanup()        
+        GPIO.cleanup()
+
 count_coin()        
 
 
