@@ -31,6 +31,7 @@ def pulse_detected(channel):
        
 
 def count_coin():
+    global now
     GPIO.add_event_detect(17, GPIO.FALLING, callback=pulse_detected, bouncetime=50)
     after = datetime.datetime.now()
     print(now - after)
