@@ -25,13 +25,11 @@ count = 0
 
 def pulse_detected(channel):
         global count
-        global now
-        now = datetime.datetime.now()
         count += 1
        
 
 def count_coin():
-    global now
+    now = datetime.datetime.now()
     GPIO.add_event_detect(17, GPIO.FALLING, callback=pulse_detected, bouncetime=50)
     after = datetime.datetime.now()
     print(now - after)
