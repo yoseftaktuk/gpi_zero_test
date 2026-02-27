@@ -26,6 +26,7 @@ count = 0
 def pulse_detected(channel):
         global count
         count += 1
+        print(count)
        
 
 def count_coin():
