@@ -35,11 +35,7 @@ def count_coin():
     GPIO.add_event_detect(17, GPIO.FALLING, callback=pulse_detected, bouncetime=50)
     after = datetime.datetime.now()
     print(after)
-    try:
-        while True:
-            sleep(1)
-    except KeyboardInterrupt:
-        GPIO.cleanup()
+    
 
 count_coin()        
 
