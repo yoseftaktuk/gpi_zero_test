@@ -13,7 +13,9 @@
 # 		print("Connection Success!")
 # from mfrc522 import SimpleMFRC522
 import RPi.GPIO as GPIO
-import time
+# import time
+from asyncio import sleep
+
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(17, GPIO.IN, pull_up_down=GPIO.PUD_UP)  # Pull-Up כי פולס = GND
@@ -26,13 +28,14 @@ def pulse_detected(channel):
     print("Pulse:", count)
     if count == 15:
         print('10 shckel')
+    if count == 10:
+        print(5)    
 
 GPIO.add_event_detect(17, GPIO.FALLING, callback=pulse_detected, bouncetime=50)
-if count == 15:
-    print('10 shckel')
+
 try:
     while True:
-        time.sleep(1)
+        sleep(1)
 
 except KeyboardInterrupt:
     GPIO.cleanup()
